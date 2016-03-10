@@ -6,8 +6,11 @@ public typealias EmptyResponse = Void
 
 public protocol Request {
   associatedtype ResponseObject
+  associatedtype ResponseError = NSError
+  associatedtype Decoder: Parser = JSON
+
   func build() -> NSURLRequest
-  func parse(j: JSON) -> Result<ResponseObject, SwishError>
+  func parse(j: Decoder.Representation) -> Result<ResponseObject, SwishError>
 }
 
 public extension Request where ResponseObject: Decodable, ResponseObject.DecodedType == ResponseObject {
