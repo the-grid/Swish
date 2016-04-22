@@ -14,7 +14,7 @@ extension APIClient: Client {
   public func performRequest<T: Request>(request: T, completionHandler: Result<T.ResponseObject, SwishError> -> Void) -> NSURLSessionDataTask {
     return requestPerformer.performRequest(request.build()) { result in
       let object = result >>- deserialize >>- request.parse
-      onMain { completionHandler(object) }
+      completionHandler(object)
     }
   }
 }
