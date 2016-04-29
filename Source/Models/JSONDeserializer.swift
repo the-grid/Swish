@@ -2,15 +2,15 @@ import Argo
 import Result
 
 struct JSONDeserializer: Deserializer {
-  func deserialize<T : Request>(request: T) -> (NSData?) -> Result<T.Decoder.Representation, SwishError> {
-    return { (data: NSData?) -> Result<T.Decoder.Representation, SwishError> in
+  func deserialize<T : Request>(request: T) -> (NSData?) -> Result<T.ResponseParser.Representation, SwishError> {
+    return { (data: NSData?) -> Result<T.ResponseParser.Representation, SwishError> in
       let json = self.parseJSON(data)
 
       switch json {
       case let .Failure(e):
         return .Failure(.InvalidJSONResponse(e))
       case let .Success(j):
-        return .Success(T.Decoder.parse(j))
+        return .Success(T.ResponseParser.parse(j))
       }
     }
   }
