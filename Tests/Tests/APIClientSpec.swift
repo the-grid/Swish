@@ -191,6 +191,50 @@ class APIClientSpec: QuickSpec {
           expect(error).toEventually(equal(SwishError.ServerError(code: expectedCode, json: expectedJSON)))
         }
       }
+
+      describe("dispatch queue configuration") {
+        it("dispatches onto the main queue by default") {
+          let performer = FakeRequestPerformer(responseData: .JSON([:]))
+          let client = APIClient(requestPerformer: performer)
+
+          var isOnMain: Bool?
+
+          client.performRequest(FakeRequest()) { _ in
+            isOnMain = NSThread.isMainThread()
+          }
+
+          expect(isOnMain).toEventually(beTrue())
+        }
+
+        it("doesn't dispatch onto main queue if queue is set to nil") {
+          let performer = FakeRequestPerformer(responseData: .JSON([:]), background: true)
+          var client = APIClient(requestPerformer: performer)
+          client.queue = nil
+
+          var isOnMain: Bool?
+
+          client.performRequest(FakeRequest()) { _ in
+            isOnMain = NSThread.isMainThread()
+          }
+
+          expect(isOnMain).toEventually(beFalse())
+        }
+
+        it("dispatches onto a custom queue if set") {
+          let performer = FakeRequestPerformer(responseData: .JSON([:]), background: true)
+          let customQueue = dispatch_queue_create("custom queue", DISPATCH_QUEUE_CONCURRENT)
+          var client = APIClient(requestPerformer: performer)
+          client.queue = customQueue
+
+          var actualQueue: dispatch_queue_t?
+
+          client.performRequest(FakeRequest()) { _ in
+            actualQueue = DispatchHelper.currentQueue()
+          }
+
+          expect(actualQueue).toEventually(beIdenticalTo(customQueue))
+        }
+      }
     }
   }
 }

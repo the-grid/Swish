@@ -29,6 +29,8 @@
 		2C721E5C1BD5A7E800846414 /* NetworkRequestPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806950D1B962C5300C61B4A /* NetworkRequestPerformer.swift */; };
 		2C721E5D1BD5A7E800846414 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88ED06C1B96736B0069F56C /* APIClient.swift */; };
 		2C721E5E1BD5A83B00846414 /* Swish.h in Headers */ = {isa = PBXBuildFile; fileRef = F80695121B962C5300C61B4A /* Swish.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A8132451CD945510072DB4F /* DispatchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8132441CD945510072DB4F /* DispatchHelper.m */; };
+		4A8132461CD945510072DB4F /* DispatchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8132441CD945510072DB4F /* DispatchHelper.m */; };
 		E506EC7E1BB5BE380032E941 /* NimbleMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506EC7D1BB5BE380032E941 /* NimbleMatchers.swift */; };
 		E5915B211BDABC4B005E5D63 /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5915B201BDABC4B005E5D63 /* NSURLRequest.swift */; };
 		E5915B221BDABC4B005E5D63 /* NSURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5915B201BDABC4B005E5D63 /* NSURLRequest.swift */; };
@@ -81,6 +83,9 @@
 /* Begin PBXFileReference section */
 		2C721E401BD5A77700846414 /* Swish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C721E491BD5A77700846414 /* Swish-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swish-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8132431CD945510072DB4F /* DispatchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DispatchHelper.h; sourceTree = "<group>"; };
+		4A8132441CD945510072DB4F /* DispatchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DispatchHelper.m; sourceTree = "<group>"; };
+		4A8132471CD945660072DB4F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		E506EC7D1BB5BE380032E941 /* NimbleMatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleMatchers.swift; sourceTree = "<group>"; };
 		E5915B201BDABC4B005E5D63 /* NSURLRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLRequest.swift; sourceTree = "<group>"; };
 		E5915B231BDAD1A3005E5D63 /* NSURLRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLRequestSpec.swift; sourceTree = "<group>"; };
@@ -157,6 +162,8 @@
 		E506EC7C1BB5BE1B0032E941 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4A8132431CD945510072DB4F /* DispatchHelper.h */,
+				4A8132441CD945510072DB4F /* DispatchHelper.m */,
 				E506EC7D1BB5BE380032E941 /* NimbleMatchers.swift */,
 			);
 			path = Helpers;
@@ -273,6 +280,7 @@
 		F8DF3B821B964B20003177CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4A8132471CD945660072DB4F /* Bridging-Header.h */,
 				F8DF3B831B964B20003177CD /* Info.plist */,
 			);
 			path = Resources;
@@ -389,6 +397,7 @@
 		F80694E81B962BB900C61B4A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = thoughtbot;
 				TargetAttributes = {
@@ -483,6 +492,7 @@
 				2C6DC9811BD5AA3B006B4C96 /* APIClientSpec.swift in Sources */,
 				2C6DC97E1BD5AA3B006B4C96 /* FakeDataTask.swift in Sources */,
 				2C6DC97C1BD5AA3B006B4C96 /* FakeRequest.swift in Sources */,
+				4A8132461CD945510072DB4F /* DispatchHelper.m in Sources */,
 				E5915B251BDAD1A3005E5D63 /* NSURLRequestSpec.swift in Sources */,
 				2C6DC97D1BD5AA3B006B4C96 /* FakeRequestPerformer.swift in Sources */,
 				2C6DC97B1BD5AA3B006B4C96 /* FakeSession.swift in Sources */,
@@ -517,6 +527,7 @@
 				F8DF3B881B964B20003177CD /* NetworkRequestPerformerSpec.swift in Sources */,
 				F8A00DE71BB5C86200169A46 /* RequestSpec.swift in Sources */,
 				F8C39B511B969A71005E065F /* FakeDataTask.swift in Sources */,
+				4A8132451CD945510072DB4F /* DispatchHelper.m in Sources */,
 				E5915B241BDAD1A3005E5D63 /* NSURLRequestSpec.swift in Sources */,
 				F8DF3B861B964B20003177CD /* FakeSession.swift in Sources */,
 				F88ED0791B96847E0069F56C /* FakeRequest.swift in Sources */,
@@ -587,6 +598,7 @@
 		2C721E551BD5A77700846414 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -594,12 +606,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.SwishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Resources/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		2C721E561BD5A77700846414 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -607,6 +622,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.SwishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Resources/Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -740,20 +756,25 @@
 		F80695091B962BB900C61B4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Tests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.SwishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Resources/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		F806950A1B962BB900C61B4A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Tests/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtbot.SwishTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tests/Resources/Bridging-Header.h";
 			};
 			name = Release;
 		};
