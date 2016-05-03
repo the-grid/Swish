@@ -6,7 +6,6 @@ public typealias EmptyResponse = Void
 
 public protocol Request {
   associatedtype ResponseObject
-  associatedtype ResponseError = NSError
   associatedtype ResponseParser: Parser = JSON
 
   func build() -> NSURLRequest
