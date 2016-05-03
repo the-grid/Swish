@@ -2,19 +2,24 @@ import Foundation
 import Argo
 import Result
 
-public struct APIClient {
+public struct APIClient: Client {
   private let requestPerformer: RequestPerformer
+
+  public var queue: dispatch_queue_t? = dispatch_get_main_queue()
 
   public init(requestPerformer: RequestPerformer = NetworkRequestPerformer()) {
     self.requestPerformer = requestPerformer
   }
-}
 
-extension APIClient: Client {
   public func performRequest<T: Request>(request: T, completionHandler: Result<T.ResponseObject, SwishError> -> Void) -> NSURLSessionDataTask {
-    return requestPerformer.performRequest(request.build()) { result in
+    return requestPerformer.performRequest(request.build()) { [queue] result in
       let object = result >>- deserialize >>- request.parse
-      completionHandler(object)
+
+      if let queue = queue {
+        dispatch_async(queue) { completionHandler(object) }
+      } else {
+        completionHandler(object)
+      }
     }
   }
 }
