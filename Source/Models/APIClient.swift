@@ -5,10 +5,11 @@ import Result
 public struct APIClient: Client {
   private let requestPerformer: RequestPerformer
 
-  public var queue: dispatch_queue_t? = dispatch_get_main_queue()
+  public let queue: dispatch_queue_t?
 
-  public init(requestPerformer: RequestPerformer = NetworkRequestPerformer()) {
+  public init(requestPerformer: RequestPerformer = NetworkRequestPerformer(), queue: dispatch_queue_t? = dispatch_get_main_queue()) {
     self.requestPerformer = requestPerformer
+    self.queue = queue
   }
 
   public func performRequest<T: Request>(request: T, completionHandler: Result<T.ResponseObject, SwishError> -> Void) -> NSURLSessionDataTask {

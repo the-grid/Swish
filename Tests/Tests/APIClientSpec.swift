@@ -198,7 +198,6 @@ class APIClientSpec: QuickSpec {
           let client = APIClient(requestPerformer: performer)
 
           var isOnMain: Bool?
-
           client.performRequest(FakeRequest()) { _ in
             isOnMain = NSThread.isMainThread()
           }
@@ -208,11 +207,9 @@ class APIClientSpec: QuickSpec {
 
         it("doesn't dispatch onto main queue if queue is set to nil") {
           let performer = FakeRequestPerformer(responseData: .JSON([:]), background: true)
-          var client = APIClient(requestPerformer: performer)
-          client.queue = nil
+          let client = APIClient(requestPerformer: performer, queue: nil)
 
           var isOnMain: Bool?
-
           client.performRequest(FakeRequest()) { _ in
             isOnMain = NSThread.isMainThread()
           }
@@ -223,11 +220,9 @@ class APIClientSpec: QuickSpec {
         it("dispatches onto a custom queue if set") {
           let performer = FakeRequestPerformer(responseData: .JSON([:]), background: true)
           let customQueue = dispatch_queue_create("custom queue", DISPATCH_QUEUE_CONCURRENT)
-          var client = APIClient(requestPerformer: performer)
-          client.queue = customQueue
+          let client = APIClient(requestPerformer: performer, queue: customQueue)
 
           var actualQueue: dispatch_queue_t?
-
           client.performRequest(FakeRequest()) { _ in
             actualQueue = DispatchHelper.currentQueue()
           }
